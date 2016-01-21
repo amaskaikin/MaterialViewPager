@@ -4,6 +4,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.ben-manes.versions'
 
+group='com.github.antonmask'
+
 version = project.MAVEN_VERSION
 
 android {
