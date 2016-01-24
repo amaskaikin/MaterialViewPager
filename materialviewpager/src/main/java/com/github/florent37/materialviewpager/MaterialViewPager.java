@@ -22,14 +22,6 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerImageHelper;
 import com.nineoldandroids.view.ViewHelper;
 
-/**
- * Created by florentchampigny on 28/04/15.
- * <p/>
- * The main class of MaterialViewPager
- * To use in an xml layout with attributes viewpager_*
- * <p/>
- * Display a preview with header, actual logo and fake cells
- */
 public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     /**
@@ -185,7 +177,8 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
                     .withPagerSlidingTabStrip(pagerTitleStripContainer)
                     .withHeaderBackground(headerBackground)
                     .withStatusBackground(findViewById(R.id.statusBackground))
-                    .withLogo(logoContainer);
+                    .withLogo(findViewById(R.id.logo))
+                    .withRevealBackground(findViewById(R.id.revealBack));
 
             //and construct the MaterialViewPagerAnimator
             //attach it to the activity to enable MaterialViewPagerHeaderView.setMaterialHeight();
@@ -319,9 +312,9 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
     /**
      * Change the header color
      */
-    public void setColor(int color, int fadeDuration) {
+    public void setColor(int color, int fadeDuration, Drawable dLogo) {
         if (MaterialViewPagerHelper.getAnimator(getContext()) != null)
-            MaterialViewPagerHelper.getAnimator(getContext()).setColor(color, fadeDuration * 2);
+            MaterialViewPagerHelper.getAnimator(getContext()).setColor(color, fadeDuration * 2, dLogo);
     }
 
     @Override
@@ -386,7 +379,8 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
         if (headerDesign == null)
             return;
 
-        int fadeDuration = 400;
+        int fadeDuration = 200;
+        Drawable logo = headerDesign.getLogo();
         int color = headerDesign.getColor();
         if (headerDesign.getColorRes() != 0) {
             color = getContext().getResources().getColor(headerDesign.getColorRes());
@@ -398,7 +392,7 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
             setImageUrl(headerDesign.getImageUrl(), fadeDuration);
         }
 
-        setColor(color, fadeDuration);
+        setColor(color, fadeDuration, logo);
 
         lastPosition = position;
     }
@@ -458,4 +452,6 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
         void OnImageLoad(ImageView imageView, Bitmap bitmap);
     }
 
+
 }
+
