@@ -62,6 +62,8 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
     //the child viewpager
     protected ViewPager mViewPager;
 
+    protected ImageView logoView;
+
     //a view used to add placeholder color below the header
     protected View headerBackground;
 
@@ -164,6 +166,11 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
             }
         }
 
+        logoView = (ImageView) findViewById(R.id.logo);
+        logoView.requestLayout();
+        logoView.getLayoutParams().height = Math.round(Utils.dpToPx(settings.logoDiameter, getContext()));
+        logoView.getLayoutParams().width = Math.round(Utils.dpToPx(settings.logoDiameter, getContext()));
+
         headerBackground = findViewById(R.id.headerBackground);
         toolbarLayoutBackground = findViewById(R.id.toolbar_layout_background);
 
@@ -177,7 +184,7 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
                     .withPagerSlidingTabStrip(pagerTitleStripContainer)
                     .withHeaderBackground(headerBackground)
                     .withStatusBackground(findViewById(R.id.statusBackground))
-                    .withLogo(findViewById(R.id.logo))
+                    .withLogo(logoView)
                     .withRevealBackground(findViewById(R.id.revealBack));
 
             //and construct the MaterialViewPagerAnimator
@@ -312,9 +319,9 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
     /**
      * Change the header color
      */
-    public void setColor(int color, int fadeDuration, Drawable dLogo) {
+    public void setColor(int color, int fadeDuration, int revealdurationback, int revealdurationlogo, Drawable dLogo) {
         if (MaterialViewPagerHelper.getAnimator(getContext()) != null)
-            MaterialViewPagerHelper.getAnimator(getContext()).setColor(color, fadeDuration * 2, dLogo);
+            MaterialViewPagerHelper.getAnimator(getContext()).setColor(color, fadeDuration, revealdurationback, revealdurationlogo, dLogo);
     }
 
     @Override
@@ -380,6 +387,8 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
             return;
 
         int fadeDuration = 200;
+        int revealdurationback = this.settings.revealdurationback;
+        int revealdurationlogo = this.settings.revealdurationlogo;
         Drawable logo = headerDesign.getLogo();
         int color = headerDesign.getColor();
         if (headerDesign.getColorRes() != 0) {
@@ -392,7 +401,7 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
             setImageUrl(headerDesign.getImageUrl(), fadeDuration);
         }
 
-        setColor(color, fadeDuration, logo);
+        setColor(color, fadeDuration, revealdurationback, revealdurationlogo, logo);
 
         lastPosition = position;
     }
