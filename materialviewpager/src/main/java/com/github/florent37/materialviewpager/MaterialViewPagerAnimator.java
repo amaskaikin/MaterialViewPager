@@ -359,11 +359,11 @@ public class MaterialViewPagerAnimator {
      * @param duration the transition color animation duration
      */
 
-    public void setColor(int color, int duration, Drawable dLogo) {
+    public void setColor(int color, int duration, int revealdurationback, int revealdurationlogo, Drawable dLogo) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            reveal(mHeader.mLogo, dLogo, color, duration);
-            reveal(mHeader.revealBackground, dLogo, color, duration);
+            reveal(mHeader.mLogo, dLogo, color, revealdurationlogo);
+            reveal(mHeader.revealBackground, dLogo, color, revealdurationback);
         }
 
         ValueAnimator colorAnim = ObjectAnimator.ofInt(mHeader.headerBackground, "backgroundColor", settings.color, color);
