@@ -20,6 +20,18 @@
             android:layout_height="match_parent" />
 
         <View
+            android:id="@+id/revealBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </View>
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"/>
+
+        <View
             android:id="@+id/statusBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
