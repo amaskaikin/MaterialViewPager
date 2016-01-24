@@ -31,6 +31,10 @@ public class MaterialViewPagerSettings implements Parcelable {
     protected int headerHeight;
     protected int headerHeightPx;
     protected int color;
+    protected int revealdurationback;
+    protected int revealdurationlogo;
+    protected int logoDiameter;
+    protected int logoDiameterPx;
 
     protected float headerAlpha;
     protected float revealAlpha;
@@ -73,9 +77,15 @@ public class MaterialViewPagerSettings implements Parcelable {
                 color = styledAttrs.getColor(R.styleable.MaterialViewPager_viewpager_color, 0);
             }
             {
+                revealdurationback = styledAttrs.getResourceId(R.styleable.MaterialViewPager_viewpager_revealdurationback, 400);
+                revealdurationlogo = styledAttrs.getResourceId(R.styleable.MaterialViewPager_viewpager_revealdurationlogo, 150);
+            }
+            {
                 headerHeightPx = styledAttrs.getDimensionPixelOffset(R.styleable.MaterialViewPager_viewpager_headerHeight, 200);
                 headerHeight = Math.round(pxToDp(headerHeightPx, context)); //convert to dp
             }
+                logoDiameterPx = styledAttrs.getDimensionPixelOffset(R.styleable.MaterialViewPager_viewpager_logoDiameter, 60);
+                logoDiameter = Math.round(pxToDp(logoDiameterPx, context)); //convert to dp
             {
                 headerAdditionalHeight = styledAttrs.getDimensionPixelOffset(R.styleable.MaterialViewPager_viewpager_headerAdditionalHeight, 60);
             }
@@ -133,7 +143,11 @@ public class MaterialViewPagerSettings implements Parcelable {
         dest.writeInt(this.headerAdditionalHeight);
         dest.writeInt(this.headerHeight);
         dest.writeInt(this.headerHeightPx);
+        dest.writeInt(this.logoDiameter);
+        dest.writeInt(this.logoDiameterPx);
         dest.writeInt(this.color);
+        dest.writeInt(this.revealdurationlogo);
+        dest.writeInt(this.revealdurationback);
         dest.writeFloat(this.headerAlpha);
         dest.writeFloat(this.revealAlpha);
         dest.writeFloat(this.imageHeaderDarkLayerAlpha);
@@ -156,7 +170,11 @@ public class MaterialViewPagerSettings implements Parcelable {
         this.headerAdditionalHeight = in.readInt();
         this.headerHeight = in.readInt();
         this.headerHeightPx = in.readInt();
+        this.logoDiameter = in.readInt();
+        this.logoDiameterPx = in.readInt();
         this.color = in.readInt();
+        this.revealdurationback = in.readInt();
+        this.revealdurationlogo = in.readInt();
         this.headerAlpha = in.readFloat();
         this.revealAlpha = in.readFloat();
         this.imageHeaderDarkLayerAlpha = in.readFloat();
