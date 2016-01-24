@@ -1,24 +1,36 @@
 package com.github.florent37.materialviewpager;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
+
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ObservableWebView;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.view.ViewHelper;
+
+/*import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewHelper;*/
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -212,7 +224,6 @@ public class MaterialViewPagerAnimator {
 
         percent = minMax(0, percent, 1);
         {
-
             if (!settings.toolbarTransparent) {
                 // change color of toolbar & viewpager indicator &  statusBaground
                 setColorPercent(percent);
@@ -249,7 +260,6 @@ public class MaterialViewPagerAnimator {
                 }
 
             }
-
 
             if (mHeader.mLogo != null) { //move the header logo to toolbar
 
@@ -313,7 +323,31 @@ public class MaterialViewPagerAnimator {
             } else {
                 headerYOffset = Float.MAX_VALUE;
                 followScrollToolbarLayout(yOffset);
+                Log.d(TAG, "SHOW");
             }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void reveal(View view, Drawable dLogo, int color, int duration) {
+
+        int cx = (view.getLeft() + view.getRight()) / 2;
+        int cy = (view.getTop() + view.getBottom()) / 2;
+
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+        if (view instanceof ImageView) {
+            view.setBackground(dLogo);
+            view.setVisibility(View.VISIBLE);
+            anim.setDuration(duration / 3);
+            anim.start();
+        } else {
+            view.setBackgroundColor(color);
+            view.setAlpha(settings.revealAlpha);
+            view.setVisibility(View.VISIBLE);
+            anim.setDuration(duration * 2);
+            anim.start();
         }
     }
 
@@ -324,7 +358,14 @@ public class MaterialViewPagerAnimator {
      * @param color    the final color
      * @param duration the transition color animation duration
      */
-    public void setColor(int color, int duration) {
+
+    public void setColor(int color, int duration, Drawable dLogo) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            reveal(mHeader.mLogo, dLogo, color, duration);
+            reveal(mHeader.revealBackground, dLogo, color, duration);
+        }
+
         ValueAnimator colorAnim = ObjectAnimator.ofInt(mHeader.headerBackground, "backgroundColor", settings.color, color);
         colorAnim.setEvaluator(new ArgbEvaluator());
         colorAnim.setDuration(duration);
@@ -343,6 +384,7 @@ public class MaterialViewPagerAnimator {
                 settings.color = animatedValue;
             }
         });
+        Log.d(TAG, "not here");
         colorAnim.start();
     }
 
@@ -662,4 +704,5 @@ public class MaterialViewPagerAnimator {
             onMaterialScrolled(visibleView, 0);
         }
     }
+
 }
