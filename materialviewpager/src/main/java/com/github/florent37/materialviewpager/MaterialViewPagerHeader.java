@@ -25,6 +25,7 @@ public class MaterialViewPagerHeader {
     protected View headerBackground;
     protected View statusBackground;
     protected View mLogo;
+    protected View revealBackground;
 
     //positions used to animate views during scroll
 
@@ -84,6 +85,11 @@ public class MaterialViewPagerHeader {
         return this;
     }
 
+    public MaterialViewPagerHeader withRevealBackground(View revealBackground) {
+        this.revealBackground = revealBackground;
+        return this;
+    }
+
     public int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -140,6 +146,10 @@ public class MaterialViewPagerHeader {
 
     public View getLogo() {
         return mLogo;
+    }
+
+    public View getRevealBackground() {
+        return revealBackground;
     }
 
 }
