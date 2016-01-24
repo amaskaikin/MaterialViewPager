@@ -9,8 +9,11 @@
         <attr name="viewpager_logoMarginTop" format="dimension"/>
         <attr name="viewpager_color" format="color"/>
         <attr name="viewpager_headerHeight" format="dimension"/>
+        <attr name="viewpager_logoDiameter" format="dimension"/>
         <attr name="viewpager_headerAlpha" format="float"/>
         <attr name="viewpager_revealAlpha" format="float"/>
+        <attr name="viewpager_revealdurationlogo" format="integer"/>
+        <attr name="viewpager_revealdurationback" format="integer"/>
         <attr name="viewpager_imageHeaderDarkLayerAlpha" format="float"/>
         <attr name="viewpager_hideToolbarAndTitle" format="boolean"/>
         <attr name="viewpager_hideLogoWithFade" format="boolean"/>
