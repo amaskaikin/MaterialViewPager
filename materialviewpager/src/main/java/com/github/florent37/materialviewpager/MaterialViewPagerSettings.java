@@ -2,6 +2,7 @@ package com.github.florent37.materialviewpager;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -32,6 +33,7 @@ public class MaterialViewPagerSettings implements Parcelable {
     protected int color;
 
     protected float headerAlpha;
+    protected float revealAlpha;
     protected float parallaxHeaderFactor;
     protected float imageHeaderDarkLayerAlpha;
 
@@ -42,6 +44,7 @@ public class MaterialViewPagerSettings implements Parcelable {
     protected boolean toolbarTransparent;
     protected boolean animatedHeaderImage;
     protected boolean disableToolbar;
+
 
     /**
      * Retrieve attributes from the MaterialViewPager
@@ -78,6 +81,7 @@ public class MaterialViewPagerSettings implements Parcelable {
             }
             {
                 headerAlpha = styledAttrs.getFloat(R.styleable.MaterialViewPager_viewpager_headerAlpha, 0.5f);
+                revealAlpha = styledAttrs.getFloat(R.styleable.MaterialViewPager_viewpager_revealAlpha, 0.5f);
             }
             {
                 imageHeaderDarkLayerAlpha = styledAttrs.getFloat(R.styleable.MaterialViewPager_viewpager_imageHeaderDarkLayerAlpha, 0.0f);
@@ -105,6 +109,7 @@ public class MaterialViewPagerSettings implements Parcelable {
             {
                 disableToolbar = styledAttrs.getBoolean(R.styleable.MaterialViewPager_viewpager_disableToolbar, false);
             }
+
             styledAttrs.recycle();
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,11 +135,13 @@ public class MaterialViewPagerSettings implements Parcelable {
         dest.writeInt(this.headerHeightPx);
         dest.writeInt(this.color);
         dest.writeFloat(this.headerAlpha);
+        dest.writeFloat(this.revealAlpha);
         dest.writeFloat(this.imageHeaderDarkLayerAlpha);
         dest.writeFloat(this.parallaxHeaderFactor);
         dest.writeByte(hideToolbarAndTitle ? (byte) 1 : (byte) 0);
         dest.writeByte(hideLogoWithFade ? (byte) 1 : (byte) 0);
         dest.writeByte(enableToolbarElevation ? (byte) 1 : (byte) 0);
+
     }
 
     public MaterialViewPagerSettings() {
@@ -151,11 +158,13 @@ public class MaterialViewPagerSettings implements Parcelable {
         this.headerHeightPx = in.readInt();
         this.color = in.readInt();
         this.headerAlpha = in.readFloat();
+        this.revealAlpha = in.readFloat();
         this.imageHeaderDarkLayerAlpha = in.readFloat();
         this.parallaxHeaderFactor = in.readFloat();
         this.hideToolbarAndTitle = in.readByte() != 0;
         this.hideLogoWithFade = in.readByte() != 0;
         this.enableToolbarElevation = in.readByte() != 0;
+
     }
 
     public static final Parcelable.Creator<MaterialViewPagerSettings> CREATOR = new Parcelable.Creator<MaterialViewPagerSettings>() {
