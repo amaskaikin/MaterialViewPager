@@ -12,35 +12,40 @@ public class HeaderDesign {
     protected int colorRes;
     protected String imageUrl;
     protected Drawable drawable;
+    protected Drawable logo;
 
     private HeaderDesign() {
     }
 
-    public static HeaderDesign fromColorAndUrl(@ColorInt int color, String imageUrl) {
+    public static HeaderDesign fromColorAndUrl(@ColorInt int color, String imageUrl, Drawable d) {
         HeaderDesign headerDesign = new HeaderDesign();
         headerDesign.color = color;
         headerDesign.imageUrl = imageUrl;
+        headerDesign.logo = d;
         return headerDesign;
     }
 
-    public static HeaderDesign fromColorResAndUrl(@ColorRes int colorRes, String imageUrl) {
+    public static HeaderDesign fromColorResAndUrl(@ColorRes int colorRes, String imageUrl, Drawable d) {
         HeaderDesign headerDesign = new HeaderDesign();
         headerDesign.colorRes = colorRes;
         headerDesign.imageUrl = imageUrl;
+        headerDesign.logo = d;
         return headerDesign;
     }
 
-    public static HeaderDesign fromColorAndDrawable(@ColorInt int color, Drawable drawable) {
+    public static HeaderDesign fromColorAndDrawable(@ColorInt int color, Drawable drawable, Drawable d) {
         HeaderDesign headerDesign = new HeaderDesign();
         headerDesign.drawable = drawable;
         headerDesign.color = color;
+        headerDesign.logo = d;
         return headerDesign;
     }
 
-    public static HeaderDesign fromColorResAndDrawable(@ColorRes int colorRes, Drawable drawable) {
+    public static HeaderDesign fromColorResAndDrawable(@ColorRes int colorRes, Drawable drawable, Drawable d) {
         HeaderDesign headerDesign = new HeaderDesign();
         headerDesign.colorRes = colorRes;
         headerDesign.drawable = drawable;
+        headerDesign.logo = d;
         return headerDesign;
     }
 
@@ -58,5 +63,9 @@ public class HeaderDesign {
 
     public Drawable getDrawable() {
         return drawable;
+    }
+
+    public Drawable getLogo() {
+        return logo;
     }
 }
