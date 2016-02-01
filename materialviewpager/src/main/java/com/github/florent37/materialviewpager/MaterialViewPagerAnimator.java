@@ -365,6 +365,12 @@ public class MaterialViewPagerAnimator {
             reveal(mHeader.mLogo, dLogo, color, revealdurationlogo);
             reveal(mHeader.revealBackground, dLogo, color, revealdurationback);
         }
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+        {
+            mHeader.mLogo.setBackground(dLogo);
+            mHeader.mLogo.setVisibility(View.VISIBLE);
+        }
 
         ValueAnimator colorAnim = ObjectAnimator.ofInt(mHeader.headerBackground, "backgroundColor", settings.color, color);
         colorAnim.setEvaluator(new ArgbEvaluator());
