@@ -24,6 +24,8 @@
         <attr name="viewpager_transparentToolbar" format="boolean"/>
         <attr name="viewpager_animatedHeaderImage" format="boolean"/>
         <attr name="viewpager_disableToolbar" format="boolean"/>
+        <attr name="viewpager_parallaxedTitle" format="integer"/>
+        <attr name="viewpager_mainTitle" format="integer"/>
 
     </declare-styleable>
 
