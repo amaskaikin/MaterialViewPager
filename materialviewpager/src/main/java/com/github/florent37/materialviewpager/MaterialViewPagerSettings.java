@@ -49,6 +49,9 @@ public class MaterialViewPagerSettings implements Parcelable {
     protected boolean animatedHeaderImage;
     protected boolean disableToolbar;
 
+    protected String parallaxedTitle;
+    protected String mainTitle;
+
 
     /**
      * Retrieve attributes from the MaterialViewPager
@@ -119,6 +122,10 @@ public class MaterialViewPagerSettings implements Parcelable {
             {
                 disableToolbar = styledAttrs.getBoolean(R.styleable.MaterialViewPager_viewpager_disableToolbar, false);
             }
+            {
+                parallaxedTitle = styledAttrs.getString(R.styleable.MaterialViewPager_viewpager_parallaxedTitle);
+                mainTitle = styledAttrs.getString(R.styleable.MaterialViewPager_viewpager_mainTitle);
+            }
 
             styledAttrs.recycle();
         } catch (Exception e) {
@@ -155,6 +162,8 @@ public class MaterialViewPagerSettings implements Parcelable {
         dest.writeByte(hideToolbarAndTitle ? (byte) 1 : (byte) 0);
         dest.writeByte(hideLogoWithFade ? (byte) 1 : (byte) 0);
         dest.writeByte(enableToolbarElevation ? (byte) 1 : (byte) 0);
+        dest.writeString(this.parallaxedTitle);
+        dest.writeString(this.mainTitle);
 
     }
 
@@ -182,6 +191,8 @@ public class MaterialViewPagerSettings implements Parcelable {
         this.hideToolbarAndTitle = in.readByte() != 0;
         this.hideLogoWithFade = in.readByte() != 0;
         this.enableToolbarElevation = in.readByte() != 0;
+        this.parallaxedTitle = in.readString();
+        this.mainTitle = in.readString();
 
     }
 
