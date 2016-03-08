@@ -323,7 +323,8 @@ public class MaterialViewPagerAnimator {
             } else {
                 headerYOffset = Float.MAX_VALUE;
                 followScrollToolbarLayout(yOffset);
-                Log.d(TAG, "SHOW");
+                if (settings.mainTitle != null)
+                    mHeader.toolbar.setTitle(settings.mainTitle);
             }
         }
     }
@@ -478,6 +479,9 @@ public class MaterialViewPagerAnimator {
      * @param yOffset
      */
     private void animateEnterToolbarLayout(float yOffset) {
+        if (settings.parallaxedTitle != null)
+            mHeader.toolbar.setTitle(settings.parallaxedTitle);
+            
         if (!followScrollToolbarIsVisible && headerAnimator != null) {
             if (headerAnimator instanceof ObjectAnimator)
                 ((ObjectAnimator) headerAnimator).cancel();
