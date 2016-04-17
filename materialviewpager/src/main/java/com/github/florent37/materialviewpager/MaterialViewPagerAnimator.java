@@ -196,7 +196,7 @@ public class MaterialViewPagerAnimator {
             Log.d("yOffset", "" + yOffset);
 
         //dispatch the new offset to all registered scrollables
-        //dispatchScrollOffset(source, minMax(0, yOffset, scrollMaxDp));
+        dispatchScrollOffset(source, minMax(0, yOffset, scrollMaxDp));
 
         float percent = yOffset / scrollMax;
 
@@ -569,6 +569,7 @@ public class MaterialViewPagerAnimator {
                     int yOffset = yOffsets.get(recyclerView);
 
                     yOffset += dy;
+                    if (yOffset < 0) yOffset = 0;
                     yOffsets.put(recyclerView, yOffset); //save the new offset
 
                     //first time you get 0, don't share it to others scrolls
