@@ -196,7 +196,7 @@ public class MaterialViewPagerAnimator {
             Log.d("yOffset", "" + yOffset);
 
         //dispatch the new offset to all registered scrollables
-        dispatchScrollOffset(source, minMax(0, yOffset, scrollMaxDp));
+        //dispatchScrollOffset(source, minMax(0, yOffset, scrollMaxDp));
 
         float percent = yOffset / scrollMax;
 
