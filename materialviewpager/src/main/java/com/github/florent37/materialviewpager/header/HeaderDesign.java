@@ -11,10 +11,19 @@ public class HeaderDesign {
     protected int color;
     protected int colorRes;
     protected String imageUrl;
+    protected String iconUrl;
     protected Drawable drawable;
     protected Drawable logo;
 
     private HeaderDesign() {
+    }
+
+    public static HeaderDesign fromColorAndUrlAndUrl(@ColorInt int color, String imageUrl, String iconUrl) {
+        HeaderDesign headerDesign = new HeaderDesign();
+        headerDesign.color = color;
+        headerDesign.imageUrl = imageUrl;
+        headerDesign.iconUrl = iconUrl;
+        return headerDesign;
     }
 
     public static HeaderDesign fromColorAndUrl(@ColorInt int color, String imageUrl, Drawable d) {
